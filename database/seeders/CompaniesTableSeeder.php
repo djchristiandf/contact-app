@@ -41,6 +41,6 @@ class CompaniesTableSeeder extends Seeder
         // }
 
         // DB::table('companies')->insert($companies);
-        //Company::factory()->count(10)->create();
+        Company::factory()->count(10)->create();
     }
 }

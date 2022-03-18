@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Company;
 use App\Models\Contact;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -33,7 +34,11 @@ class DatabaseSeeder extends Seeder
         // ->create();
 
         //or use has[relationship] - laravel9
-        Company::factory()->hasContacts(3)->count(10)->create();
+        //Company::factory()->hasContacts(3)->count(10)->create();
+        User::factory()->count(5)->create();
+        Company::factory()->hasContacts(5)->count(50)->create();
+
+
 
     }
 }

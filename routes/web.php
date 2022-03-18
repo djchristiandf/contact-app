@@ -25,22 +25,50 @@ Route::get('/', function () {
 //     return view('contacts.index');
 // })->name('contacts.index');
 
-Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
-Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
+// Route::get('/contacts', [ContactController::class, 'index'])
+//  ->name('contacts.index')
+//  ->middleware('auth');
+// Route::post('/contacts', [ContactController::class, 'store'])
+//     ->name('contacts.store')
+//     ->middleware('auth');
+// // Route::get('/contacts/create', function() {
+// //     //return "<h1>Add new Contact</h1>";
+// //     return view('contacts.create');
+// // })->name('contacts.create');
+// Route::get('/contacts/create', [ContactController::class, 'create'])
+// ->name('contacts.create')
+// ->middleware('auth');;
 
-// Route::get('/contacts/create', function() {
-//     //return "<h1>Add new Contact</h1>";
-//     return view('contacts.create');
-// })->name('contacts.create');
-Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create');
+// // Route::get('/contacts/{id}', function($id) {
+// //     $contact = Contact::find($id);
+// //     return view('contacts.show', compact('contact')); // ['contact' => $contact]
+// // })->name('contacts.show');
 
-// Route::get('/contacts/{id}', function($id) {
-//     $contact = Contact::find($id);
-//     return view('contacts.show', compact('contact')); // ['contact' => $contact]
-// })->name('contacts.show');
+// Route::get('/contacts/{id}', [ContactController::class, 'show'])
+// ->name('contacts.show')
+// ->middleware('auth');;
 
-Route::get('/contacts/{id}', [ContactController::class, 'show'])->name('contacts.show');
+// Route::get('/contacts/{id}/edit', [ContactController::class, 'edit'])
+// ->name('contacts.edit')
+// ->middleware('auth');;
+// Route::put('/contacts/{id}', [ContactController::class, 'update'])
+// ->name('contacts.update')
+// ->middleware('auth');;
+// Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])
+// ->name('contacts.destroy')
+// ->middleware('auth');
 
-Route::get('/contacts/{id}/edit', [ContactController::class, 'edit'])->name('contacts.edit');
-Route::put('/contacts/{id}', [ContactController::class, 'update'])->name('contacts.update');
-Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+Route::middleware('auth')->group(function () {
+    Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+    Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
+    Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create');
+    Route::get('/contacts/{id}', [ContactController::class, 'show'])->name('contacts.show');
+    Route::put('/contacts/{id}', [ContactController::class, 'update'])->name('contacts.update');
+    Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+    Route::get('/contacts/{id}/edit', [ContactController::class, 'edit'])->name('contacts.edit');
+});
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

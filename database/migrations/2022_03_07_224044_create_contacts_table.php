@@ -25,7 +25,7 @@ return new class extends Migration
 
             //new laravel 8 + (note need more: unsignedBigInteger)
             $table->foreignId('company_id')->constrained()->onDelete('cascade');
-
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
             $table->timestamps();
 
